@@ -13,8 +13,10 @@
         <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
       <tr>
+        <th scope="col">ID</th>
         <th scope="col">Table</th>
         <th scope="col">Column</th>
         <th scope="col">Data Type</th>
@@ -23,11 +25,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>account</td>
-        <td>id</td>
-        <td>int</td>
-        <td>Description</td>
+      <tr  v-for="row in rows" :key="row">
+        <td> {{ row.id  }} </td>
+        <td> {{ row.tableName }} </td>
+        <td> {{ row.columnName }} </td>
+        <td> {{ row.dataType }} </td>
+        <td> {{ row.description }} </td>
         <td>
           <button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-success btn-sm">Düzenle</button>
         </td>
@@ -61,3 +64,26 @@
     </div>
   </div>
 </template>
+<script>
+
+const axios = require('axios');
+
+export default {
+  data () {
+    return {
+      rows: []
+    }
+  },
+  mounted() {
+    axios.get('http://localhost:8031/dictionary')
+        .then(response => (this.rows = response.data))
+        .catch(function (error) {
+          console.log(error);
+        })
+        .finally(function (res) {
+          console.log(res);
+        })
+  }
+}
+</script>
+
