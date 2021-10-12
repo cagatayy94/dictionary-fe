@@ -25,14 +25,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr  v-for="row in rows" :key="row">
+        <tr  v-for="row in rows" :key="row">
         <td> {{ row.id  }} </td>
         <td> {{ row.tableName }} </td>
         <td> {{ row.columnName }} </td>
         <td> {{ row.dataType }} </td>
         <td> {{ row.description }} </td>
         <td>
-          <button type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-success btn-sm">Düzenle</button>
+          <button v-on:click="update(row)" type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-success btn-sm">Düzenle</button>
         </td>
       </tr>
       </tbody>
@@ -52,7 +52,7 @@
           <form>
             <div class="form-group">
               <label for="description">Description</label>
-              <input type="text" class="form-control" id="description" aria-describedby="description">
+              <input type="text" class="form-control" id="description" aria-describedby="description" v-bind:value="currentRow.description">
             </div>
           </form>
         </div>
@@ -65,13 +65,18 @@
   </div>
 </template>
 <script>
-
 const axios = require('axios');
 
 export default {
   data () {
     return {
-      rows: []
+      rows: [],
+      currentRow:{},
+    }
+  },
+  methods: {
+    update: function (row) {
+      this.currentRow = row
     }
   },
   mounted() {
@@ -86,4 +91,3 @@ export default {
   }
 }
 </script>
-
