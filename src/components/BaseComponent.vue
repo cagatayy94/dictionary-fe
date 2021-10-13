@@ -77,22 +77,23 @@ export default {
   methods: {
     update: function (row) {
       this.currentRow = row
+    },
+    setCurrentRowEmpty : function () {
+      this.currentRow = {}
     }
   },
   mounted() {
+    let updateDescriptionModal = document.getElementById('updateDescriptionModal');
+    updateDescriptionModal.addEventListener('hidden.bs.modal', this.setCurrentRowEmpty)
+
     axios.get('http://localhost:8031/dictionary')
-        .then(response => (this.rows = response.data))
-        .catch(function (error) {
-          console.log(error);
-        })
-        .finally(function (res) {
-          console.log(res);
-        })
-    let updateDescriptionModal = document.getElementById('updateDescriptionModal')
-    updateDescriptionModal.addEventListener('hidden.bs.modal', function () {
-      this.currentRow = {};
-      alert("asd")
-    })
+      .then(response => (this.rows = response.data))
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function (res) {
+        console.log(res);
+      });
   }
 }
 </script>
