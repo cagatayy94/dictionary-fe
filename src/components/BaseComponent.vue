@@ -32,21 +32,21 @@
         <td> {{ row.dataType }} </td>
         <td> {{ row.description }} </td>
         <td>
-          <button v-on:click="update(row)" type="button" data-toggle="modal" data-target="#updateModal" class="btn btn-success btn-sm">Düzenle</button>
+          <button v-on:click="update(row)" type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateDescriptionModal">
+            Düzenle
+          </button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
   <!-- Modal -->
-  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="updateDescriptionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Update Description</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
@@ -57,7 +57,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
@@ -88,6 +88,11 @@ export default {
         .finally(function (res) {
           console.log(res);
         })
+    let updateDescriptionModal = document.getElementById('updateDescriptionModal')
+    updateDescriptionModal.addEventListener('hidden.bs.modal', function () {
+      this.currentRow = {};
+      alert("asd")
+    })
   }
 }
 </script>
